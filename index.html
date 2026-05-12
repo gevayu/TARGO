@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Targo Solutions · שרשרת אספקה גלובלית, ניהול תפעול</title>
+<meta name="description" content="ע.ש. טרגו פתרונות בע״מ. לא ייעוץ, ביצוע. ניהול תפעול, רכש ושרשרת אספקה למדטק, ביטחון, היטק ותעשייה.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:           #FFFFFE;
+  --paper:        #FAFBFF;
+  --celeste:      #F0F4FF;
+  --celeste-deep: #E5EBFF;
+  --lavender:     #F6F5FF;
+  --ink:          #0A083B;
+  --ink-soft:     #262450;
+  --body:         #57586E;
+  --body-light:   #8B8C9C;
+  --blue:         #081F49;
+  --blue-hover:   #143364;
+  --blue-soft:    #C5D0E5;
+  --orange:       #FF8030;
+  --green:        #37CA72;
+  --line:         #E2E1EA;
+  --line-soft:    #EFEFF5;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background-color:#fff;
+  background-image:
+    radial-gradient(circle 800px at 100% 200px, #d5c5ff, transparent),
+    radial-gradient(circle 600px at 0% 90%, #d5c5ff, transparent);
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
+  color:var(--ink);
+  font-family:'Noto Sans Hebrew',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-weight:400; font-size:17px; line-height:1.55;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+img { max-width:100%; display:block; }
+a { color:inherit; text-decoration:none; }
+button { border:none; background:none; cursor:pointer; font-family:inherit; }
+
+/* PRIMITIVES */
+.container { max-width:1240px; margin:0 auto; padding:0 1.5rem; }
+@media (min-width:768px) { .container { padding:0 2.5rem; } }
+
+.eyebrow {
+  display:inline-flex; align-items:center; gap:0.7rem;
+  font-size:0.78rem; font-weight:600; letter-spacing:0.16em;
+  text-transform:uppercase; color:var(--blue);
+  margin-bottom:1.25rem;
+}
+.eyebrow::before {
+  content:''; width:1.6rem; height:2px; background:var(--blue);
+  border-radius:2px;
+}
+
+h1, h2, h3, h4 { color:var(--ink); letter-spacing:-0.015em; }
+.display { font-size:clamp(2.5rem, 4.5vw + 1rem, 5.25rem); font-weight:300; line-height:1.05; letter-spacing:-0.025em; }
+.display .hl { color:var(--blue); font-weight:300; }
+.h2 { font-size:clamp(2rem, 2.5vw + 1rem, 3.5rem); font-weight:300; line-height:1.1; letter-spacing:-0.02em; }
+.h2 .hl { color:var(--blue); font-weight:300; }
+.h3 { font-size:1.4rem; font-weight:600; line-height:1.25; }
+
+.lead { font-size:1.18rem; line-height:1.6; color:var(--body); font-weight:400; max-width:54ch; }
+.lead strong { color:var(--ink); font-weight:600; }
+
+p { color:var(--body); }
+
+/* BUTTONS */
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:0.55rem;
+  padding:0.95rem 2rem; min-width:170px;
+  font-family:inherit; font-size:1rem; font-weight:600;
+  border-radius:9999px; border:1px solid transparent;
+  cursor:pointer; transition:all 0.25s cubic-bezier(0.22,1,0.36,1);
+  white-space:nowrap;
+}
+.btn-primary { background:var(--blue); color:#fff; }
+.btn-primary:hover { background:var(--blue-hover); transform:translateY(-1px); box-shadow:0 8px 24px -8px rgba(8,31,73,0.45); }
+.btn-secondary { background:var(--ink); color:#fff; }
+.btn-secondary:hover { background:var(--ink-soft); }
+.btn-ghost { background:transparent; color:var(--ink); border-color:var(--line); }
+.btn-ghost:hover { border-color:var(--blue); color:var(--blue); }
+.btn-outline { background:transparent; color:var(--ink); border-color:var(--blue); }
+.btn-outline:hover { background:var(--blue); color:#fff; }
+.btn .arrow { font-weight:300; }
+
+/* SKIP LINK */
+.skip-link {
+  position:fixed; right:1rem; top:-3rem; z-index:1000;
+  background:var(--blue); color:#fff;
+  padding:0.7rem 1.2rem; font-size:0.9rem; font-weight:600;
+  border-radius:9999px; transition:top 0.2s;
+}
+.skip-link:focus { top:1rem; outline:3px solid #fff; outline-offset:2px; }
+
+/* NAV */
+nav {
+  position:sticky; top:0; z-index:99; background:rgba(255,255,255,0.85);
+  border-bottom:1px solid var(--line-soft);
+  backdrop-filter:saturate(180%) blur(10px);
+  -webkit-backdrop-filter:saturate(180%) blur(10px);
+}
+.nav-inner {
+  max-width:1240px; margin:0 auto; padding:1rem 1.5rem;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+}
+@media (min-width:768px) { .nav-inner { padding:1.1rem 2.5rem; } }
+.nav-logo { font-weight:700; font-size:1.1rem; color:var(--ink); display:flex; align-items:baseline; gap:0.4rem; }
+.nav-logo span { color:var(--blue); font-weight:500; }
+.nav-links { display:flex; align-items:center; gap:2rem; }
+.nav-links a { font-size:1rem; color:var(--body); font-weight:500; transition:color 0.2s; }
+.nav-links a:hover { color:var(--ink); }
+.nav-links a[aria-current="page"] { color:var(--ink); font-weight:600; }
+.nav-cta {
+  background:var(--blue); color:#fff !important; padding:0.55rem 1.4rem;
+  border-radius:9999px; font-weight:600; transition:background 0.2s;
+}
+.nav-cta:hover { background:var(--blue-hover); }
+@media (max-width:640px) {
+  .nav-links a:not(.nav-cta) { display:none; }
+}
+
+/* HERO */
+.hero { background:transparent; padding:5rem 0 5rem; position:relative; overflow:hidden; }
+.hero-grid {
+  display:grid; grid-template-columns:1.15fr 1fr; gap:4rem; align-items:center;
+}
+.hero-content { max-width:680px; }
+.hero h1 { margin-bottom:1.6rem; }
+.hero-tagline { font-size:1.2rem; line-height:1.65; color:var(--body); max-width:54ch; margin-bottom:1.6rem; }
+.hero-tagline strong { color:var(--ink); font-weight:600; }
+.hero-industries {
+  display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:2.4rem;
+}
+.industry-chip {
+  padding:0.5rem 1rem; border-radius:9999px;
+  background:#fff; border:1px solid var(--line);
+  font-size:0.92rem; font-weight:600; color:var(--ink);
+  transition:all 0.2s;
+}
+.industry-chip:hover { border-color:var(--blue); color:var(--blue); }
+.hero-cta { display:flex; gap:0.8rem; flex-wrap:wrap; }
+
+.hero-image-wrap {
+  position:relative;
+}
+.hero-image-wrap::before {
+  content:''; position:absolute; inset:1.5rem -1.2rem -1.2rem 1.5rem;
+  background:linear-gradient(135deg, var(--celeste) 0%, var(--lavender) 100%);
+  border-radius:24px;
+  z-index:0;
+}
+.hero-image-wrap img {
+  position:relative; z-index:1;
+  width:100%; aspect-ratio:4/3; max-height:60vh;
+  object-fit:cover; object-position:center;
+  border-radius:24px;
+  filter:contrast(1.05) saturate(0.95);
+}
+
+/* SECTION BASE */
+.section { padding:6rem 0; position:relative; }
+.section-paper { background:var(--paper); }
+.section-celeste { background:var(--celeste); }
+.section-lavender { background:var(--lavender); }
+.section-transparent { background:transparent; }
+
+.section-head { max-width:780px; margin-bottom:3.5rem; }
+.section-head h2 { margin-top:0.4rem; }
+
+/* TABBED PANELS (industries + pain) */
+.tabs {
+  display:flex; gap:0.4rem; flex-wrap:wrap;
+  margin-bottom:2.5rem;
+  padding-bottom:0.5rem;
+  border-bottom:1px solid var(--line);
+}
+.tab {
+  padding:0.85rem 1.4rem;
+  font-size:1rem; font-weight:600;
+  color:var(--body); background:transparent;
+  border-radius:9999px;
+  border:1px solid transparent;
+  display:inline-flex; align-items:center; gap:0.6rem;
+  transition:all 0.2s;
+  position:relative;
+}
+.tab:hover { color:var(--ink); background:var(--celeste); }
+.tab.active {
+  color:#fff; background:var(--blue);
+}
+.pain-badge {
+  font-size:0.7rem; letter-spacing:0.06em; text-transform:uppercase;
+  padding:0.18rem 0.55rem; border-radius:9999px;
+  font-weight:700;
+}
+.b-startup { background:rgba(55,202,114,0.15); color:#2D9456; }
+.b-growth  { background:rgba(8,31,73,0.1); color:var(--blue); }
+.b-mature  { background:rgba(255,128,48,0.15); color:#C45200; }
+.tab.active .pain-badge {
+  background:rgba(255,255,255,0.18); color:#fff;
+}
+
+.panel { display:none; animation:fadeUp 0.3s ease; }
+.panel.active { display:grid; grid-template-columns:1fr 1.4fr; gap:2.5rem; align-items:start; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+.profile {
+  background:linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 100%);
+  color:#fff;
+  border-radius:24px;
+  padding:2.4rem;
+  position:relative; overflow:hidden;
+}
+.profile::before {
+  content:''; position:absolute;
+  top:-30%; left:-20%;
+  width:200px; height:200px;
+  background:radial-gradient(circle, rgba(213,197,255,0.25) 0%, transparent 70%);
+  pointer-events:none;
+}
+.profile-tag {
+  font-size:0.78rem; font-weight:600; letter-spacing:0.14em;
+  text-transform:uppercase; color:#d5c5ff;
+  margin-bottom:1.4rem;
+}
+.profile-title {
+  font-size:1.5rem; font-weight:700; line-height:1.25;
+  color:#fff; margin-bottom:1rem;
+}
+.profile-desc {
+  font-size:1rem; line-height:1.6; color:rgba(255,255,255,0.78);
+  margin-bottom:1.8rem;
+}
+.profile-stats {
+  display:flex; gap:1.5rem; padding-top:1.4rem;
+  border-top:1px solid rgba(255,255,255,0.12);
+}
+.profile-stat-num {
+  font-size:1.6rem; font-weight:700; color:#d5c5ff;
+  font-feature-settings:'lnum' 1; line-height:1; margin-bottom:0.3rem;
+}
+.profile-stat-label { font-size:0.82rem; color:rgba(255,255,255,0.65); line-height:1.3; }
+
+.pain-list { display:flex; flex-direction:column; gap:0; }
+.pain-item {
+  padding:1.4rem 0;
+  border-bottom:1px solid var(--line-soft);
+  display:flex; gap:1.2rem; align-items:flex-start;
+}
+.pain-item:last-of-type { border-bottom:none; }
+.pain-num {
+  flex-shrink:0;
+  width:36px; height:36px; border-radius:50%;
+  background:var(--celeste); color:var(--blue);
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.95rem; font-weight:700;
+  font-feature-settings:'lnum' 1;
+}
+.pain-item h4 { font-size:1.1rem; font-weight:700; color:var(--ink); margin-bottom:0.4rem; line-height:1.3; }
+.pain-item p { font-size:1rem; line-height:1.6; color:var(--body); }
+
+.cta-row {
+  grid-column:1/-1; margin-top:2rem; padding-top:2rem;
+  border-top:1px solid var(--line);
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:1rem;
+}
+.cta-row p { font-size:1.04rem; color:var(--ink); margin:0; }
+.cta-row p strong { color:var(--ink); font-weight:600; }
+
+/* SC SECTION */
+.sc-top {
+  display:grid; grid-template-columns:1fr 1fr; gap:4rem;
+  margin-bottom:3rem; align-items:start;
+}
+.sc-top-desc { font-size:1.1rem; line-height:1.65; color:var(--body); margin-bottom:1.6rem; max-width:50ch; }
+.sc-points { display:grid; grid-template-columns:1fr; gap:0.9rem; }
+.sc-point {
+  display:flex; align-items:flex-start; gap:0.7rem;
+  font-size:1rem; line-height:1.5; color:var(--ink);
+}
+.sc-point::before {
+  content:''; flex-shrink:0; margin-top:0.45rem;
+  width:1rem; height:1rem;
+  border-radius:50%;
+  background:var(--blue);
+  position:relative;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-size:contain;
+}
+
+.sc-callout {
+  background:var(--celeste); color:var(--ink);
+  border-radius:18px;
+  padding:1.6rem 2rem; margin-bottom:3rem;
+  font-size:1.08rem; line-height:1.6; font-weight:500;
+}
+
+.sc-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-bottom:2.5rem; }
+.sc-card {
+  background:#fff; border-radius:20px;
+  border:1px solid var(--line-soft);
+  padding:2.4rem;
+  transition:all 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+.sc-card:hover { transform:translateY(-4px); box-shadow:0 20px 40px -20px rgba(8,31,73,0.18); border-color:var(--blue-soft); }
+.sc-card-num {
+  font-size:0.9rem; font-weight:700; color:var(--blue);
+  letter-spacing:0.1em; margin-bottom:1.4rem;
+  font-feature-settings:'lnum' 1;
+}
+.sc-card h3 { font-size:1.3rem; font-weight:700; line-height:1.25; margin-bottom:0.8rem; color:var(--ink); }
+.sc-card p { font-size:1rem; line-height:1.6; color:var(--body); }
+
+.sc-diff {
+  background:linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 100%);
+  color:#fff;
+  border-radius:24px;
+  padding:2rem 2.4rem;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:1.5rem;
+  position:relative; overflow:hidden;
+}
+.sc-diff::before {
+  content:''; position:absolute;
+  top:-50%; right:-10%;
+  width:300px; height:300px;
+  background:radial-gradient(circle, rgba(213,197,255,0.3) 0%, transparent 70%);
+  pointer-events:none;
+}
+.sc-diff p { color:rgba(255,255,255,0.85); font-size:1.05rem; line-height:1.5; margin:0; max-width:60ch; position:relative; }
+.sc-diff p strong { color:#fff; font-weight:700; }
+.sc-diff .btn { background:#fff; color:var(--ink); position:relative; }
+.sc-diff .btn:hover { background:var(--celeste); transform:translateY(-1px); }
+
+/* NETWORK */
+.net-header {
+  display:grid; grid-template-columns:1fr 1fr; gap:4rem;
+  align-items:end; margin-bottom:3rem;
+}
+.net-lead { font-size:1.1rem; line-height:1.65; color:var(--body); max-width:55ch; }
+
+.net-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-bottom:3rem; }
+.net-card {
+  background:#fff; border-radius:20px;
+  border:1px solid var(--line-soft);
+  padding:2.2rem;
+  transition:all 0.3s cubic-bezier(0.22,1,0.36,1);
+  display:flex; flex-direction:column;
+}
+.net-card:hover { transform:translateY(-4px); box-shadow:0 20px 40px -20px rgba(8,31,73,0.15); border-color:var(--blue-soft); }
+.net-wordmark { padding-bottom:1rem; border-bottom:1px solid var(--line-soft); margin-bottom:1rem; }
+.net-region {
+  display:block;
+  font-size:1.6rem; font-weight:700; color:var(--blue);
+  letter-spacing:0.04em; line-height:1;
+  direction:ltr; text-align:right;
+  margin-bottom:0.4rem;
+}
+.net-region-sub {
+  display:block;
+  font-size:0.78rem; color:var(--body); font-weight:600;
+  letter-spacing:0.14em; text-transform:uppercase;
+}
+.net-country { font-size:1rem; color:var(--body-light); margin-bottom:1.4rem; }
+.net-specs { display:flex; flex-direction:column; gap:0.5rem; flex:1; }
+.net-spec {
+  font-size:0.92rem; color:var(--body); display:flex; align-items:flex-start; gap:0.5rem; line-height:1.5;
+}
+.net-spec::before { content:'·'; color:var(--blue); font-weight:700; flex-shrink:0; }
+.net-badge {
+  margin-top:1.4rem;
+  display:inline-block; align-self:flex-start;
+  font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--blue); background:var(--celeste);
+  padding:0.35rem 0.8rem; border-radius:9999px;
+}
+
+.net-footer {
+  display:grid; grid-template-columns:auto auto; gap:2.5rem;
+  align-items:center; flex-wrap:wrap;
+  padding-top:2.4rem; border-top:1px solid var(--line);
+}
+.net-stats { display:flex; gap:2.4rem; flex-wrap:wrap; }
+.net-stat { display:flex; flex-direction:column; gap:0.2rem; }
+.net-stat-num {
+  font-size:1.4rem; font-weight:700; color:var(--blue);
+  font-feature-settings:'lnum' 1;
+  letter-spacing:0.02em;
+}
+.net-stat-label { font-size:0.85rem; color:var(--body); line-height:1.4; }
+@media (max-width:768px) { .net-footer { grid-template-columns:1fr; } }
+
+/* HOW IT WORKS */
+.steps { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
+.step {
+  background:#fff; border-radius:20px;
+  border:1px solid var(--line-soft);
+  padding:2.4rem 2rem;
+  position:relative;
+  transition:all 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+.step:hover { transform:translateY(-4px); box-shadow:0 18px 36px -18px rgba(8,31,73,0.15); border-color:var(--blue-soft); }
+.step-num {
+  font-size:2.6rem; font-weight:300; color:var(--blue);
+  line-height:1; margin-bottom:1.2rem;
+  font-feature-settings:'lnum' 1; letter-spacing:-0.02em;
+}
+.step h3 { font-size:1.2rem; font-weight:700; margin-bottom:0.8rem; line-height:1.3; }
+.step p { font-size:0.98rem; line-height:1.55; color:var(--body); margin-bottom:1rem; }
+.step-note {
+  font-size:0.78rem; font-weight:600; color:var(--blue);
+  letter-spacing:0.06em; text-transform:uppercase;
+}
+
+/* SERVICES */
+.srv-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+.srv-card {
+  background:#fff; border-radius:24px;
+  border:1px solid var(--line-soft);
+  padding:2.6rem;
+  position:relative;
+  transition:all 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+.srv-card:hover { transform:translateY(-4px); box-shadow:0 24px 48px -22px rgba(8,31,73,0.18); border-color:var(--blue-soft); }
+.ai-badge {
+  position:absolute; top:1.4rem; left:1.4rem;
+  background:linear-gradient(135deg, var(--blue) 0%, var(--ink-soft) 100%);
+  color:#fff;
+  font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+  padding:0.4rem 0.8rem; border-radius:9999px;
+}
+.srv-num {
+  font-size:0.9rem; font-weight:700; color:var(--blue);
+  letter-spacing:0.1em; margin-bottom:1.2rem;
+  font-feature-settings:'lnum' 1;
+}
+.srv-card h3 { font-size:1.5rem; font-weight:700; margin-bottom:0.8rem; line-height:1.25; }
+.srv-card > p { font-size:1.04rem; line-height:1.6; color:var(--body); margin-bottom:1.4rem; }
+.srv-points { display:flex; flex-direction:column; gap:0.6rem; }
+.srv-point {
+  font-size:0.95rem; color:var(--body); display:flex; align-items:flex-start; gap:0.6rem; line-height:1.45;
+}
+.srv-point::before {
+  content:''; flex-shrink:0; margin-top:0.5rem;
+  width:0.45rem; height:0.45rem; border-radius:50%; background:var(--blue);
+}
+
+/* CTA */
+.cta-sec {
+  background:linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 100%);
+  color:#fff;
+  padding:6rem 0;
+  position:relative; overflow:hidden;
+}
+.cta-sec::before {
+  content:''; position:absolute;
+  top:-30%; right:-10%;
+  width:60vw; height:60vw; max-width:700px; max-height:700px;
+  background:radial-gradient(circle, rgba(213,197,255,0.3) 0%, transparent 70%);
+  pointer-events:none;
+}
+.cta-grid {
+  position:relative;
+  display:grid; grid-template-columns:1.1fr 1fr; gap:4rem; align-items:center;
+}
+.cta-grid h2 {
+  color:#fff;
+  font-size:clamp(2.2rem, 3vw + 1rem, 4rem);
+  font-weight:300; line-height:1.05; letter-spacing:-0.025em;
+}
+.cta-grid h2 .hl { color:#d5c5ff; font-weight:300; }
+.cta-right p { font-size:1.1rem; color:rgba(255,255,255,0.82); margin-bottom:1.6rem; line-height:1.6; }
+.cta-btns { display:flex; flex-wrap:wrap; gap:0.8rem; margin-bottom:1.4rem; }
+.cta-btns .btn-primary { background:#fff; color:var(--ink); }
+.cta-btns .btn-primary:hover { background:var(--celeste); color:var(--ink); }
+.cta-note { font-size:0.92rem; color:rgba(255,255,255,0.65); }
+.cta-note .check { color:#d5c5ff; font-weight:700; margin-left:0.3rem; }
+
+/* FLOATING FORM */
+.float-trigger {
+  position:fixed; bottom:1.5rem; left:1.5rem; z-index:90;
+  display:flex; flex-direction:column; align-items:flex-start; gap:0.4rem;
+}
+.float-btn {
+  display:inline-flex; align-items:center; gap:0.6rem;
+  background:var(--blue); color:#fff;
+  padding:0.95rem 1.6rem; border-radius:9999px;
+  font-size:0.95rem; font-weight:600;
+  box-shadow:0 12px 32px -8px rgba(8,31,73,0.4);
+  transition:all 0.25s;
+}
+.float-btn:hover { background:var(--blue-hover); transform:translateY(-2px); }
+.float-note {
+  font-size:0.78rem; color:var(--body);
+  background:rgba(255,255,255,0.9); padding:0.3rem 0.8rem;
+  border-radius:9999px; backdrop-filter:blur(4px);
+}
+
+.float-overlay {
+  display:none; position:fixed; inset:0; z-index:98;
+  background:rgba(10,8,59,0.55); backdrop-filter:blur(6px);
+}
+.float-overlay.open { display:block; }
+
+.float-form {
+  position:fixed; bottom:6rem; left:1.5rem; z-index:99;
+  background:#fff;
+  border-radius:24px;
+  padding:2rem;
+  width:340px;
+  display:none;
+  flex-direction:column; gap:0.9rem;
+  box-shadow:0 32px 80px -24px rgba(10,8,59,0.4);
+  animation:slideUp 0.3s ease;
+}
+.float-form.open { display:flex; }
+@keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.float-form-title { font-size:1.2rem; font-weight:700; color:var(--ink); }
+.float-form-sub { font-size:0.92rem; color:var(--body); margin-top:-0.4rem; line-height:1.5; }
+.float-input, .float-textarea {
+  background:var(--paper); border:1px solid var(--line);
+  padding:0.85rem 1rem; color:var(--ink);
+  font-size:0.95rem; font-family:inherit; width:100%;
+  border-radius:12px; outline:none;
+  transition:border-color 0.2s, background 0.2s;
+}
+.float-input:focus, .float-textarea:focus { border-color:var(--blue); background:#fff; }
+.float-input::placeholder, .float-textarea::placeholder { color:var(--body-light); }
+.float-textarea { height:90px; resize:none; }
+.float-submit {
+  background:var(--blue); color:#fff; border:none;
+  padding:0.95rem; border-radius:9999px;
+  font-size:0.95rem; font-weight:600; font-family:inherit;
+  cursor:pointer; transition:background 0.2s;
+}
+.float-submit:hover { background:var(--blue-hover); }
+.float-close {
+  position:absolute; top:1rem; left:1rem;
+  width:32px; height:32px; border-radius:50%;
+  background:var(--celeste); color:var(--ink);
+  font-size:1rem;
+  display:flex; align-items:center; justify-content:center;
+  transition:background 0.2s;
+}
+.float-close:hover { background:var(--celeste-deep); }
+.float-success { display:none; text-align:center; padding:1rem 0; }
+.float-success-icon {
+  width:48px; height:48px; border-radius:50%;
+  background:var(--blue); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.5rem; margin:0 auto 0.7rem;
+}
+.float-success p { font-size:0.95rem; color:var(--body); line-height:1.55; }
+.float-success p strong { color:var(--ink); }
+
+/* FOOTER */
+footer {
+  background:#fff; border-top:1px solid var(--line-soft);
+  padding:3rem 0 1.5rem;
+}
+.footer-grid {
+  max-width:1240px; margin:0 auto; padding:0 1.5rem;
+  display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:3rem;
+  margin-bottom:2.5rem;
+}
+@media (min-width:768px) { .footer-grid { padding:0 2.5rem; } }
+.footer-brand h3 { font-size:1.15rem; font-weight:700; color:var(--ink); margin-bottom:0.5rem; }
+.footer-brand h3 span { color:var(--blue); font-weight:500; }
+.footer-brand p { font-size:0.92rem; color:var(--body); line-height:1.5; max-width:34ch; }
+.footer-col-title { font-size:0.78rem; font-weight:700; color:var(--ink); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:1rem; }
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:0.6rem; }
+.footer-col a { font-size:0.95rem; color:var(--body); transition:color 0.2s; }
+.footer-col a:hover { color:var(--blue); }
+.footer-bottom {
+  max-width:1240px; margin:0 auto; padding:1.5rem 1.5rem 0;
+  border-top:1px solid var(--line-soft);
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:1rem;
+  font-size:0.85rem; color:var(--body-light);
+}
+@media (min-width:768px) { .footer-bottom { padding:1.5rem 2.5rem 0; } }
+.footer-bottom-links { display:flex; gap:1.4rem; }
+.footer-bottom-links a { color:var(--body-light); transition:color 0.2s; }
+.footer-bottom-links a:hover { color:var(--blue); }
+@media (max-width:640px) { .footer-grid { grid-template-columns:1fr; gap:2rem; } }
+
+/* RESPONSIVE */
+@media (max-width:960px) {
+  .hero-grid { grid-template-columns:1fr; gap:3rem; }
+  .hero-image-wrap { order:-1; max-width:480px; margin:0 auto; }
+  .panel.active { grid-template-columns:1fr; gap:2rem; }
+  .sc-top { grid-template-columns:1fr; gap:2rem; }
+  .sc-cards { grid-template-columns:1fr; }
+  .net-header { grid-template-columns:1fr; gap:2rem; align-items:start; }
+  .net-grid { grid-template-columns:1fr; }
+  .steps { grid-template-columns:1fr 1fr; }
+  .srv-grid { grid-template-columns:1fr; }
+  .cta-grid { grid-template-columns:1fr; gap:2rem; }
+}
+@media (max-width:640px) {
+  .hero { padding:3rem 0; }
+  .section { padding:4rem 0; }
+  .steps { grid-template-columns:1fr; }
+  .float-trigger { bottom:1rem; left:1rem; }
+  .float-form { width:calc(100vw - 2rem); left:1rem; bottom:5rem; }
+  .float-note { display:none; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">דלג לתוכן הראשי</a>
+
+<!-- NAV -->
+<nav aria-label="ניווט ראשי">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">ע.ש. טרגו פתרונות בע״מ <span>· Targo</span></a>
+    <div class="nav-links">
+      <a href="index.html" aria-current="page">עמוד ראשי</a>
+      <a href="about.html">אודות</a>
+      <a href="https://wa.link/huf1g6" class="nav-cta">דברו איתנו</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow">תפעול · רכש · שרשרת אספקה · AI</div>
+        <h1 class="display">חיסכון אמיתי. שליטה מלאה. <span class="hl">שרשרת אספקה שעובדת.</span></h1>
+        <p class="hero-tagline">
+          לא ייעוץ, ביצוע. מתחילים בפרויקט ממוקד, מוכיחים ערך, וממשיכים לניהול שוטף. <strong>הלקוחות שלנו מתחילים בפרויקט אחד, ונשארים.</strong>
+        </p>
+        <div class="hero-industries">
+          <span class="industry-chip">ביטחון</span>
+          <span class="industry-chip">מד-טק</span>
+          <span class="industry-chip">היטק</span>
+          <span class="industry-chip">תעשייה</span>
+        </div>
+        <div class="hero-cta">
+          <a href="https://wa.link/huf1g6" class="btn btn-primary">מתחילים בפרויקט <span class="arrow">←</span></a>
+          <a href="#services" class="btn btn-ghost">מה אנחנו עושים</a>
+        </div>
+      </div>
+
+      <div class="hero-image-wrap">
+        <img
+          src="https://targosolutions.com/wp-content/uploads/2025/12/top-view-smart-business-people-joining-gathering-wooden-gear-symposium-1024x576.jpg"
+          srcset="https://targosolutions.com/wp-content/uploads/2025/12/top-view-smart-business-people-joining-gathering-wooden-gear-symposium-768x432.jpg 768w, https://targosolutions.com/wp-content/uploads/2025/12/top-view-smart-business-people-joining-gathering-wooden-gear-symposium-1024x576.jpg 1024w, https://targosolutions.com/wp-content/uploads/2025/12/top-view-smart-business-people-joining-gathering-wooden-gear-symposium-1536x864.jpg 1536w"
+          sizes="(max-width:960px) 90vw, 480px"
+          alt="צוות מנהלים מחבר גלגלי שיניים, סמל לתיאום שרשרת אספקה"
+          loading="eager" decoding="async"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="section section-paper">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">לאיזה תעשיות</div>
+      <h2 class="h2">כל דרישת רכש, <span class="hl">נענית.</span></h2>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" onclick="showInd('b',this)" role="tab">ביטחון ואווירו</button>
+      <button class="tab" onclick="showInd('m',this)" role="tab">מדטק</button>
+      <button class="tab" onclick="showInd('h',this)" role="tab">היטק ותקשורת</button>
+      <button class="tab" onclick="showInd('i',this)" role="tab">תעשייה כללית</button>
+    </div>
+
+    <div id="ib" class="panel active">
+      <div class="profile">
+        <div class="profile-tag">ביטחון ואווירו</div>
+        <div class="profile-title">מכירים את הדרישות. מכירים את הספקים.</div>
+        <div class="profile-desc">תוכניות דחופות, דרישות קפדניות, ספקים שצריך לאמת מהר. אנחנו יודעים איך לעבוד בסביבה הזו.</div>
+        <div class="profile-stats">
+          <div><div class="profile-stat-num">AS9100</div><div class="profile-stat-label">סטנדרט אווירו מוכר</div></div>
+          <div><div class="profile-stat-num">Tzo'am</div><div class="profile-stat-label">היכרות עם מאגר הספקים</div></div>
+        </div>
+      </div>
+      <div class="pain-list">
+        <div class="pain-item"><div class="pain-num">1</div><div><h4>ספק חדש לרכיב שאין בספקים הקיימים</h4><p>צריכים יכולת ייצור ספציפית שהספקים הרגילים לא נותנים. אנחנו מוצאים ומאמתים תוך ימים.</p></div></div>
+        <div class="pain-item"><div class="pain-num">2</div><div><h4>תוכנית דחופה, צריך ספק מהר</h4><p>אין זמן לתהליך רגיל. אנחנו מביאים ספק מאומת שיכול להתחיל מיד.</p></div></div>
+        <div class="pain-item"><div class="pain-num">3</div><div><h4>ספק גיבוי לספק קיים</h4><p>תלות בספק יחיד היא סיכון. אנחנו בונים אלטרנטיבה מאומתת לפני שהבעיה קורית.</p></div></div>
+        <div class="pain-item"><div class="pain-num">4</div><div><h4>ייצור בחו״ל לפי דרישות ביטחוניות</h4><p>CNC דיוק גבוה, כבילה, ציפויים מיוחדים. ספקים מאומתים באירופה ובארה״ב.</p></div></div>
+      </div>
+      <div class="cta-row">
+        <p><strong>שלחו מפרט, נחזור תוך 24 שעות עם ספק רלוונטי.</strong></p>
+        <a href="https://wa.link/huf1g6" class="btn btn-primary">שלחו מפרט <span class="arrow">←</span></a>
+      </div>
+    </div>
+
+    <div id="im" class="panel">
+      <div class="profile">
+        <div class="profile-tag">מדטק</div>
+        <div class="profile-title">ספקים שעומדים ברגולציה הרפואית.</div>
+        <div class="profile-desc">FDA, CE, ISO 13485. לא כל ספק יכול לעמוד בזה. אנחנו עובדים רק עם ספקים מאומתים שכבר עברו את התהליך.</div>
+        <div class="profile-stats">
+          <div><div class="profile-stat-num">FDA</div><div class="profile-stat-label">21 CFR Part 820</div></div>
+          <div><div class="profile-stat-num">ISO</div><div class="profile-stat-label">13485 מוכר</div></div>
+        </div>
+      </div>
+      <div class="pain-list">
+        <div class="pain-item"><div class="pain-num">1</div><div><h4>ספק שלא עומד ב-FDA, עוצר את ה-Clearance</h4><p>טעות בבחירת ספק יכולה לעכב את כל האישור הרגולטורי. אנחנו בודקים לפני שמתחילים.</p></div></div>
+        <div class="pain-item"><div class="pain-num">2</div><div><h4>מעבר מ-Prototype לייצור סדרתי</h4><p>הספק שעשה לכם 10 יחידות לא בהכרח יכול לעשות 10,000. אנחנו מוצאים את הנכון לנפח הנכון.</p></div></div>
+        <div class="pain-item"><div class="pain-num">3</div><div><h4>Made in Europe לדרישות CE</h4><p>לקוחות אירופאים דורשים ייצור אירופאי. יש לנו ספקים מאומתים ברומניה והולנד.</p></div></div>
+        <div class="pain-item"><div class="pain-num">4</div><div><h4>QC ובקרת איכות שוטפת</h4><p>אנחנו מנהלים את בקרת האיכות מול הספק. אתם לא מגלים בעיות כשהסחורה מגיעה.</p></div></div>
+      </div>
+      <div class="cta-row">
+        <p><strong>שלחו מפרט, נחזור תוך 24 שעות עם ספק רלוונטי.</strong></p>
+        <a href="https://wa.link/huf1g6" class="btn btn-primary">שלחו מפרט <span class="arrow">←</span></a>
+      </div>
+    </div>
+
+    <div id="ih" class="panel">
+      <div class="profile">
+        <div class="profile-tag">היטק ותקשורת</div>
+        <div class="profile-title">חומרה, אלקטרוניקה ו-PCB בנפח הנכון.</div>
+        <div class="profile-desc">מוצרי היטק דורשים ספקים מדויקים עם זמני תגובה קצרים. טאיוואן וסין, אבל לא כל ספק שווה אותו דבר.</div>
+        <div class="profile-stats">
+          <div><div class="profile-stat-num">PCB</div><div class="profile-stat-label">טאיוואן וסין</div></div>
+          <div><div class="profile-stat-num">NPI</div><div class="profile-stat-label">מ-R&amp;D לייצור</div></div>
+        </div>
+      </div>
+      <div class="pain-list">
+        <div class="pain-item"><div class="pain-num">1</div><div><h4>PCB ואלקטרוניקה, הספק הנכון בטאיוואן</h4><p>לא כל מפעל בטאיוואן שווה אותו דבר. אנחנו מכירים את ההבדלים ובוחרים לפי המוצר.</p></div></div>
+        <div class="pain-item"><div class="pain-num">2</div><div><h4>NPI, מעבר מ-R&amp;D לייצור</h4><p>השלב הכי קריטי והכי מסוכן. אנחנו מנהלים אותו מקצה לקצה.</p></div></div>
+        <div class="pain-item"><div class="pain-num">3</div><div><h4>נפחים שגדלים מהר</h4><p>הספק שעבד ב-1,000 יחידות לא בהכרח יכול לעשות 100,000. אנחנו בונים את המסלול מראש.</p></div></div>
+        <div class="pain-item"><div class="pain-num">4</div><div><h4>Lead Times קצרים תחת לחץ</h4><p>לקוח גדול דורש משלוח בזמן. אנחנו מנהלים את הלחץ מול הספק כדי שאתם לא תצטרכו.</p></div></div>
+      </div>
+      <div class="cta-row">
+        <p><strong>שלחו מפרט, נחזור תוך 24 שעות עם ספק רלוונטי.</strong></p>
+        <a href="https://wa.link/huf1g6" class="btn btn-primary">שלחו מפרט <span class="arrow">←</span></a>
+      </div>
+    </div>
+
+    <div id="ii" class="panel">
+      <div class="profile">
+        <div class="profile-tag">תעשייה כללית</div>
+        <div class="profile-title">CNC, מתכת, פלסטיק וציפויים מיוחדים.</div>
+        <div class="profile-desc">ייצור תעשייתי דורש ספקים אמינים עם קיבולת מספקת. אנחנו מוצאים את הנכון לפי חומר, דיוק ונפח.</div>
+        <div class="profile-stats">
+          <div><div class="profile-stat-num">CNC</div><div class="profile-stat-label">דיוק גבוה · נפחים גדולים</div></div>
+          <div><div class="profile-stat-num">3D</div><div class="profile-stat-label">Print · Prototype · סדרתי</div></div>
+        </div>
+      </div>
+      <div class="pain-list">
+        <div class="pain-item"><div class="pain-num">1</div><div><h4>CNC דיוק גבוה, בארץ יקר מדי</h4><p>ספקים בארה״ב ואירופה נותנים את אותו דיוק במחיר תחרותי. אנחנו מנהלים את הקשר.</p></div></div>
+        <div class="pain-item"><div class="pain-num">2</div><div><h4>ציפויים מיוחדים שאין בארץ</h4><p>ציפויים לביטחון ורפואה. ספקים מאומתים בארה״ב עם ניסיון בדרישות הספציפיות.</p></div></div>
+        <div class="pain-item"><div class="pain-num">3</div><div><h4>פלסטיק הזרקה, נפחים גדולים בסין</h4><p>עלות יחידה נמוכה בנפחים גדולים, אבל צריך לדעת איזה מפעל וסין גדולה מאוד.</p></div></div>
+        <div class="pain-item"><div class="pain-num">4</div><div><h4>3D Print, מדגמים מהירים לפני הייצור</h4><p>לפני שמשקיעים בכלים, מדגמים מהירים שמאפשרים לאשר עיצוב ותפקוד.</p></div></div>
+      </div>
+      <div class="cta-row">
+        <p><strong>שלחו מפרט, נחזור תוך 24 שעות עם ספק רלוונטי.</strong></p>
+        <a href="https://wa.link/huf1g6" class="btn btn-primary">שלחו מפרט <span class="arrow">←</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN SLIDER -->
+<section class="section section-transparent">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">מזהים את עצמכם?</div>
+      <h2 class="h2">הכאב משתנה לפי שלב, <span class="hl">הפתרון נשאר אותו דבר.</span></h2>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" onclick="showPain('s',this)" role="tab">
+        <span class="pain-badge b-startup">מתחילים</span> רק התחלנו לחשוב על ייצור
+      </button>
+      <button class="tab" onclick="showPain('g',this)" role="tab">
+        <span class="pain-badge b-growth">צומחים</span> מייצרים, אבל הכל כאוס
+      </button>
+      <button class="tab" onclick="showPain('m',this)" role="tab">
+        <span class="pain-badge b-mature">מבוססים</span> צריכים לייעל ולהוריד עלויות
+      </button>
+    </div>
+
+    <div id="ps" class="panel active">
+      <div class="profile">
+        <div class="profile-tag">הפרופיל שלכם</div>
+        <div class="profile-title">יש מוצר. עכשיו צריך לחשוב על ייצור.</div>
+        <div class="profile-desc">יש R&amp;D, יש מימון ראשוני, יש חזון. אבל ייצור זה עולם אחר: ספקים, עלויות, רגולציה. לא יודעים מאיפה להתחיל, ולא רוצים לשרוף כסף על טעויות.</div>
+        <div class="profile-stats">
+          <div><div class="profile-stat-num">6–12</div><div class="profile-stat-label">חודשים שורפים על ספק לא נכון</div></div>
+          <div><div class="profile-stat-num">40%+</div><div class="profile-stat-label">מהתקציב הולך על טעויות נמנעות</div></div>
+        </div>
+      </div>
+      <div class="pain-list">
+        <div class="pain-item"><div class="pain-num">1</div><div><h4>המוצר מוכן, הייצור לא</h4><p>לקוחות מחכים, המשקיעים שואלים שאלות, ואתם עדיין מחפשים ספק שיענה לאימייל.</p></div></div>
+        <div class="pain-item"><div class="pain-num">2</div><div><h4>אין לכם מושג מאיפה להתחיל</h4><p>מי הספק הנכון? מה הסטנדרטים? כל שאלה מובילה לעשר שאלות נוספות.</p></div></div>
+        <div class="pain-item"><div class="pain-num">3</div><div><h4>VP Operations עולה 50K+ לחודש</h4><p>לא תגייסו כזה עכשיו, אבל אתם זקוקים לאותה רמת ידע ביום הראשון.</p></div></div>
+        <div class="pain-item"><div class="pain-num">4</div><div><h4>טעות בספק עולה לכם שנה</h4><p>בעיות איכות, עיכובי משלוח, אי-עמידה ב-FDA. מאחרים את ה-Launch בחצי שנה לפחות.</p></div></div>
+      </div>
+      <div class="cta-row">
+        <p>הלקוחות שלנו <strong>מתחילים בפרויקט אחד, ונשארים.</strong></p>
+        <a href="https://wa.link/huf1g6" class="btn btn-primary">בואו נדבר <span class="arrow">←</span></a>
+      </div>
+    </div>
+
+    <div id="pg" class="panel">
+      <div class="profile">
+        <div class="profile-tag">הפרופיל שלכם</div>
+        <div class="profile-title">מייצרים כבר, אבל הכל כאוטי.</div>
+        <div class="profile-desc">יש ספקים, יש ייצור. אבל שרשרת האספקה עובדת על אדרנלין ואקסל, ובכל רבעון יש משבר אחר.</div>
+        <div class="profile-stats">
+          <div><div class="profile-stat-num">30%</div><div class="profile-stat-label">מהרווח הגולמי נאכל בלוגיסטיקה</div></div>
+          <div><div class="profile-stat-num">×1</div><div class="profile-stat-label">ספק יחיד, בלי גיבוי</div></div>
+        </div>
+      </div>
+      <div class="pain-list">
+        <div class="pain-item"><div class="pain-num">1</div><div><h4>הספק לא אמין, ואין אלטרנטיבה</h4><p>עיכוב אחד מאחר לכם את כל הרבעון. אין ספק גיבוי ואין זמן לחפש אחד.</p></div></div>
+        <div class="pain-item"><div class="pain-num">2</div><div><h4>הלוגיסטיקה אוכלת את הרווחים</h4><p>משלמים יותר מדי, אבל אין לכם זמן לנהל מו״מ מחדש עם הספקים.</p></div></div>
+        <div class="pain-item"><div class="pain-num">3</div><div><h4>הצמיחה מהירה מהתשתית</h4><p>מה שעבד ב-1,000 יחידות לא עובד ב-10,000. שרשרת האספקה לא גדלה איתכם.</p></div></div>
+        <div class="pain-item"><div class="pain-num">4</div><div><h4>אין שליטה על מה שקורה בייצור</h4><p>אתם לא יודעים מה קורה במפעל עד שהסחורה מגיעה, ולפעמים גם אז לא.</p></div></div>
+      </div>
+      <div class="cta-row">
+        <p>הלקוחות שלנו <strong>מתחילים בפרויקט אחד, ונשארים.</strong></p>
+        <a href="https://wa.link/huf1g6" class="btn btn-primary">בואו נדבר <span class="arrow">←</span></a>
+      </div>
+    </div>
+
+    <div id="pm" class="panel">
+      <div class="profile">
+        <div class="profile-tag">הפרופיל שלכם</div>
+        <div class="profile-title">תפעול קיים, אבל יקר ולא מסודר.</div>
+        <div class="profile-desc">יש מחלקת רכש, יש ספקים קבועים. אבל המשקיעים לוחצים על הרווחיות ואתם יודעים שיש מה לייעל.</div>
+        <div class="profile-stats">
+          <div><div class="profile-stat-num">+20%</div><div class="profile-stat-label">חיסכון ממוצע בעלויות רכש ולוגיסטיקה</div></div>
+          <div><div class="profile-stat-num">50K+</div><div class="profile-stat-label">עלות VP Operations שכיר לחודש</div></div>
+        </div>
+      </div>
+      <div class="pain-list">
+        <div class="pain-item"><div class="pain-num">1</div><div><h4>המשקיעים דוחקים על ה-P&amp;L</h4><p>הצמיחה טובה, אבל הרווחיות לא. עלויות הייצור גבוהות מדי ואף אחד לא יודע למה.</p></div></div>
+        <div class="pain-item"><div class="pain-num">2</div><div><h4>הספקים עובדים לנוחות שלהם</h4><p>לא עשיתם מו״מ אמיתי בשנתיים האחרונות. הספקים יודעים את זה.</p></div></div>
+        <div class="pain-item"><div class="pain-num">3</div><div><h4>צריכים ספק חדש, אין זמן לחפש</h4><p>פרויקט חדש, מוצר חדש, וצריך ספק מאומת מהר. מחלקת הרכש כבר עמוסה.</p></div></div>
+        <div class="pain-item"><div class="pain-num">4</div><div><h4>אין נוכחות בשווקי ייצור חדשים</h4><p>אירופה, אסיה. יש שם הזדמנויות שאתם לא מנצלים כי אין לכם את הרשת.</p></div></div>
+      </div>
+      <div class="cta-row">
+        <p>הלקוחות שלנו <strong>מתחילים בפרויקט אחד, ונשארים.</strong></p>
+        <a href="https://wa.link/huf1g6" class="btn btn-primary">בואו נדבר <span class="arrow">←</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SC SECTION -->
+<section class="section section-lavender">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">שירות, הקמה וניהול שרשרת אספקה</div>
+      <h2 class="h2">אנחנו מנהלים את שרשרת האספקה שלכם, <span class="hl">מדגמים ועד סדרתי.</span></h2>
+    </div>
+
+    <div class="sc-top">
+      <div>
+        <p class="sc-top-desc">בין אם מתחילים לייצר לראשונה ובין אם יש לכם ספקים שלא עובדים כמו שצריך, אנחנו נכנסים, מסדרים ומנהלים. ניסיון ישיר עם ספקים ברשת מדינות גלובלית.</p>
+      </div>
+      <div class="sc-points">
+        <div class="sc-point">מוסמך ISO 9001, ניהול איכות בסטנדרט בינלאומי</div>
+        <div class="sc-point">ספקים מאומתים במזרח אסיה, אירופה וארה״ב</div>
+        <div class="sc-point">עמידה בדרישות FDA, CE ו-ISO 13485</div>
+        <div class="sc-point">הזמנות סדרתיות שוטפות, אנחנו מבצעים, אתם לא נוגעים</div>
+        <div class="sc-point">ניהול תפעול חודשי, Fractional COO לחברות ללא מנהל תפעול</div>
+        <div class="sc-point">אתם מתרכזים במוצר, אנחנו מנהלים את הספק</div>
+      </div>
+    </div>
+
+    <div class="sc-callout">רוב החברות שמייצרות בחו״ל לראשונה שורפות 6 עד 12 חודשים על ספק לא נכון, לפני שמבינות מה טעו. אנחנו עוצרים את זה לפני שזה קורה.</div>
+
+    <div class="sc-cards">
+      <div class="sc-card"><div class="sc-card-num">01</div><h3>בחירת הספק הנכון</h3><p>Due Diligence מעמיק לפי המוצר, הרגולציה, הנפח והמחיר. לא לפי מה שנוח לנו.</p></div>
+      <div class="sc-card"><div class="sc-card-num">02</div><h3>הקמת שרשרת האספקה</h3><p>חוזים עם הגנות נכונות, תהליכי QC, ספק גיבוי. כל מה שצריך לפני שמתחילים לייצר.</p></div>
+      <div class="sc-card"><div class="sc-card-num">03</div><h3>ניהול שוטף, Retainer</h3><p>אנחנו הממשק הבלעדי מול הספק. דיווח חודשי שקוף. אתם לא מנהלים ספקים, אנחנו כן.</p></div>
+    </div>
+
+    <div class="sc-diff">
+      <p><strong>למה זה שונה?</strong> רוב המתווכים מחברים ועוזבים. אנחנו נשארים, מנהלים, ואחראים על התוצאה.</p>
+      <a href="https://wa.link/huf1g6" class="btn btn-primary">ספרו לנו על הפרויקט <span class="arrow">←</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- NETWORK -->
+<section class="section section-transparent">
+  <div class="container">
+    <div class="net-header">
+      <div>
+        <div class="eyebrow">רשת ספקים גלובלית</div>
+        <h2 class="h2">רשת ספקים גלובלית. <span class="hl">ספק אחד נכון</span> לכל צורך.</h2>
+      </div>
+      <p class="net-lead">לא מחפשים ספקים, עובדים עם רשת מאומתת מניסיון ישיר. בוחרים את המדינה והספק לפי הצורך שלכם: מחיר, זמן, רגולציה, קרבה.</p>
+    </div>
+
+    <div class="net-grid">
+      <div class="net-card">
+        <div class="net-wordmark">
+          <span class="net-region">EAST ASIA</span>
+          <span class="net-region-sub">מזרח אסיה</span>
+        </div>
+        <div class="net-country">סין · טאיוואן</div>
+        <div class="net-specs">
+          <div class="net-spec">CNC · מתכת · פלסטיק · 3D Print</div>
+          <div class="net-spec">PCB · אלקטרוניקה · היטק</div>
+          <div class="net-spec">נפחים גדולים · מחיר תחרותי</div>
+          <div class="net-spec">אמינות גבוהה · דיוק</div>
+        </div>
+        <div class="net-badge">מחיר · נפח · אמינות</div>
+      </div>
+      <div class="net-card">
+        <div class="net-wordmark">
+          <span class="net-region">EUROPE</span>
+          <span class="net-region-sub">אירופה</span>
+        </div>
+        <div class="net-country">רומניה · הולנד · יוון</div>
+        <div class="net-specs">
+          <div class="net-spec">Made in Europe · תעודות CE</div>
+          <div class="net-spec">מתכת · פלסטיק · אופטיקה</div>
+          <div class="net-spec">דיוק גבוה · סטנדרטים אירופאים</div>
+          <div class="net-spec">כבילה · קרוב לישראל</div>
+        </div>
+        <div class="net-badge">CE · ISO · דיוק</div>
+      </div>
+      <div class="net-card">
+        <div class="net-wordmark">
+          <span class="net-region">AMERICAS</span>
+          <span class="net-region-sub">ארה״ב</span>
+        </div>
+        <div class="net-country">USA</div>
+        <div class="net-specs">
+          <div class="net-spec">CNC דיוק גבוה</div>
+          <div class="net-spec">ציפויים מיוחדים</div>
+          <div class="net-spec">עמידה בדרישות FDA ו-DoD</div>
+          <div class="net-spec">סטנדרטים ביטחוניים ורפואיים</div>
+        </div>
+        <div class="net-badge">FDA · DoD · ציפויים</div>
+      </div>
+    </div>
+
+    <div class="net-footer">
+      <div class="net-stats">
+        <div class="net-stat"><div class="net-stat-num">GLOBAL</div><div class="net-stat-label">רשת ספקים גלובלית</div></div>
+        <div class="net-stat"><div class="net-stat-num">25+</div><div class="net-stat-label">שנות ניסיון ברכש</div></div>
+        <div class="net-stat"><div class="net-stat-num">ישיר</div><div class="net-stat-label">עובדים ישירות מול הספק, בלי אמצעים</div></div>
+      </div>
+      <a href="https://wa.link/huf1g6" class="btn btn-outline">רוצים לדעת מאיזו מדינה כדאי לייצר? <span class="arrow">←</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-celeste">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">איך זה עובד</div>
+      <h2 class="h2">פשוט, מהיר, <span class="hl">מדיד.</span></h2>
+    </div>
+
+    <div class="steps">
+      <article class="step">
+        <div class="step-num">01</div>
+        <h3>שיחת היכרות</h3>
+        <p>30 דקות. אתם מספרים על האתגר, אנחנו אומרים בכנות אם יש טעם להמשיך ואיך.</p>
+        <div class="step-note">חינם · ללא התחייבות</div>
+      </article>
+      <article class="step">
+        <div class="step-num">02</div>
+        <h3>אבחון ותוכנית</h3>
+        <p>היכרות עם הארגון, מיפוי הבעיות, ותוכנית עבודה ברורה עם יעדים ומדדים.</p>
+        <div class="step-note">שקיפות מלאה</div>
+      </article>
+      <article class="step">
+        <div class="step-num">03</div>
+        <h3>ביצוע שוטף</h3>
+        <p>נכנסים לעומק מול ספקים, הנהלה ופיתוח. פועלים כחלק מהצוות, מדווחים שבועית.</p>
+        <div class="step-note">מינימום 3 חודשים</div>
+      </article>
+      <article class="step">
+        <div class="step-num">04</div>
+        <h3>תוצאות שנשארות</h3>
+        <p>חיסכון בעלויות, ספקים מסודרים, תהליכים כתובים שנשארים גם אחרינו.</p>
+        <div class="step-note">ערך לטווח ארוך</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section section-transparent" id="services">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">מה אנחנו עושים</div>
+      <h2 class="h2">לא ייעוץ, <span class="hl">ביצוע בפועל.</span></h2>
+    </div>
+
+    <div class="srv-grid">
+      <article class="srv-card">
+        <div class="ai-badge">AI Powered</div>
+        <div class="srv-num">01</div>
+        <h3>ניהול תפעול מלא</h3>
+        <p>ניהול שוטף של כל מערך התפעול כ-Fractional COO. אחראים על תוצאות, לא רק המלצות.</p>
+        <div class="srv-points">
+          <div class="srv-point">בניית אסטרטגיה תפעולית + KPIs</div>
+          <div class="srv-point">ניהול צוות תפעול פנימי</div>
+          <div class="srv-point">הכנה לגיוס הון ו-Scale</div>
+        </div>
+      </article>
+
+      <article class="srv-card">
+        <div class="ai-badge">AI Powered</div>
+        <div class="srv-num">02</div>
+        <h3>ניהול פרויקטים</h3>
+        <p>הובלת פרויקטים מקצה לקצה. NPI, העברה מפיתוח לייצור, קבלני משנה. אחריות מלאה.</p>
+        <div class="srv-points">
+          <div class="srv-point">הגדרת פרויקט, תכנון ובקרה</div>
+          <div class="srv-point">העברה מ-R&amp;D לייצור סדרתי (NPI)</div>
+          <div class="srv-point">עמידה בלוחות זמנים ותקציב</div>
+        </div>
+      </article>
+
+      <article class="srv-card">
+        <div class="ai-badge">AI Powered</div>
+        <div class="srv-num">03</div>
+        <h3>ניהול רכש אסטרטגי</h3>
+        <p>רכש אסטרטגי: איתור ספקים, מו״מ, חוזים וניהול שוטף. יודעים מה לקנות, ממי ומתי.</p>
+        <div class="srv-points">
+          <div class="srv-point">איתור ספקים + מו״מ</div>
+          <div class="srv-point">ניהול חוזים והתקשרויות</div>
+          <div class="srv-point">מדיניות מלאי וחיסכון בעלויות</div>
+        </div>
+      </article>
+
+      <article class="srv-card">
+        <div class="ai-badge">AI Powered</div>
+        <div class="srv-num">04</div>
+        <h3>הקמה וניהול שרשרת אספקה גלובלית</h3>
+        <p>מקימים ומנהלים שרשרת אספקה מול ספקים מאומתים ברשת גלובלית, מבחירה ועד ניהול שוטף.</p>
+        <div class="srv-points">
+          <div class="srv-point">Due Diligence + בחירת ספק</div>
+          <div class="srv-point">הזמנות סדרתיות שוטפות</div>
+          <div class="srv-point">QC + עמידה ב-FDA, CE, ISO</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="container">
+    <div class="cta-grid">
+      <h2>30 דקות שיכולות לקצר לכם את הדרך <span class="hl">ב-12 חודשים.</span></h2>
+      <div class="cta-right">
+        <p>שיחת אבחון ללא עלות וללא התחייבות. נבין יחד איפה אתם עומדים ואם אנחנו יכולים לעזור.</p>
+        <div class="cta-btns">
+          <a href="https://wa.link/huf1g6" class="btn btn-primary">קבעו שיחה עכשיו <span class="arrow">←</span></a>
+        </div>
+        <p class="cta-note"><span class="check">✓</span>מגיבים תוך יום עסקים &nbsp; <span class="check">✓</span>ללא התחייבות</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FLOATING FORM -->
+<div class="float-overlay" id="overlay" onclick="closeForm()" aria-hidden="true"></div>
+
+<div class="float-form" id="floatForm" role="dialog" aria-labelledby="float-form-title" aria-hidden="true">
+  <button class="float-close" onclick="closeForm()" aria-label="סגור טופס">✕</button>
+  <div class="float-form-title" id="float-form-title">השאירו פרטים</div>
+  <p class="float-form-sub">נחזור אליכם תוך 24 שעות עם ספק רלוונטי.</p>
+  <input class="float-input" type="text" placeholder="שם מלא" id="fname" aria-label="שם מלא">
+  <input class="float-input" type="text" placeholder="חברה" id="fcompany" aria-label="שם החברה">
+  <input class="float-input" type="tel" placeholder="טלפון" id="fphone" aria-label="טלפון">
+  <textarea class="float-textarea" placeholder="תיאור קצר של הצורך / המפרט" id="fdetails" aria-label="תיאור הצורך"></textarea>
+  <button class="float-submit" onclick="submitForm()">שלח · נחזור תוך 24 שעות</button>
+  <div class="float-success" id="fsuccess" role="status">
+    <div class="float-success-icon" aria-hidden="true">✓</div>
+    <p>קיבלנו. <strong>נחזור אליכם תוך 24 שעות</strong> עם ספק רלוונטי לצורך שלכם.</p>
+  </div>
+</div>
+
+<div class="float-trigger">
+  <button class="float-btn" onclick="openForm()" aria-label="פתח טופס יצירת קשר">
+    <span aria-hidden="true">✉</span> השאירו פרטים
+  </button>
+  <span class="float-note">לקניינים ומנהלי רכש</span>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>ע.ש. טרגו פתרונות בע״מ <span>· Targo</span></h3>
+      <p>שרשרת אספקה גלובלית, ניהול תפעול ורכש אסטרטגי. ישראל.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">צרו קשר</div>
+      <ul>
+        <li><a href="tel:+972526800909">052-6800909</a></li>
+        <li><a href="mailto:info@targosolutions.com">info@targosolutions.com</a></li>
+        <li><a href="https://wa.link/huf1g6">וואטסאפ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">ניווט</div>
+      <ul>
+        <li><a href="index.html">עמוד ראשי</a></li>
+        <li><a href="about.html">אודות</a></li>
+        <li><a href="#services">מה אנחנו עושים</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 ע.ש. טרגו פתרונות בע״מ · כל הזכויות שמורות</div>
+    <div class="footer-bottom-links">
+      <a href="https://targosolutions.com/tou/">תקנון</a>
+      <a href="https://targosolutions.com/privacy-policy/">פרטיות</a>
+      <a href="https://targosolutions.com/accessibility/">נגישות</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function openForm() {
+  document.getElementById('floatForm').classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+}
+function closeForm() {
+  document.getElementById('floatForm').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+function submitForm() {
+  const name = document.getElementById('fname').value;
+  const company = document.getElementById('fcompany').value;
+  const phone = document.getElementById('fphone').value;
+  const details = document.getElementById('fdetails').value;
+  if (!name || !phone) { alert('נא למלא שם וטלפון'); return; }
+  const msg = encodeURIComponent('שם: ' + name + '\nחברה: ' + company + '\nטלפון: ' + phone + '\nפרטים: ' + details);
+  window.open('https://wa.me/972526800909?text=' + msg, '_blank');
+  document.getElementById('fsuccess').style.display = 'block';
+  document.querySelector('.float-submit').style.display = 'none';
+}
+function showInd(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('[onclick^="showInd"]').forEach(t => t.classList.remove('active'));
+  document.getElementById('i' + id).classList.add('active');
+  btn.classList.add('active');
+}
+function showPain(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('[onclick^="showPain"]').forEach(t => t.classList.remove('active'));
+  document.getElementById('p' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

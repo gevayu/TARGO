@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="ISO 9001:2015 Certified Company">
+  <defs>
+    <path id="iso-top-arc" d="M 14,50 A 36,36 0 0 1 86,50"/>
+    <path id="iso-bottom-arc" d="M 14,50 A 36,36 0 0 0 86,50"/>
+    <linearGradient id="iso-disc" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A55C7"/>
+      <stop offset="100%" stop-color="#0E3B95"/>
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="none" stroke="#1A55C7" stroke-width="1.6"/>
+  <circle cx="50" cy="50" r="42" fill="none" stroke="#1A55C7" stroke-width="0.6"/>
+  <circle cx="50" cy="50" r="32" fill="url(#iso-disc)"/>
+  <circle cx="50" cy="50" r="33.4" fill="none" stroke="#1A55C7" stroke-width="0.5"/>
+  <text font-family="Georgia, 'Times New Roman', serif" font-size="6.4" font-weight="700" fill="#1A55C7" letter-spacing="2.2">
+    <textPath href="#iso-top-arc" startOffset="50%" text-anchor="middle">CERTIFIED</textPath>
+  </text>
+  <text font-family="Georgia, 'Times New Roman', serif" font-size="6.4" font-weight="700" fill="#1A55C7" letter-spacing="2.2">
+    <textPath href="#iso-bottom-arc" startOffset="50%" text-anchor="middle">COMPANY</textPath>
+  </text>
+  <g fill="none" stroke="#FFFFFF" stroke-width="0.55" opacity="0.7">
+    <circle cx="50" cy="44" r="9"/>
+    <ellipse cx="50" cy="44" rx="9" ry="3"/>
+    <ellipse cx="50" cy="44" rx="3" ry="9"/>
+    <ellipse cx="50" cy="44" rx="6" ry="9"/>
+    <line x1="41" y1="44" x2="59" y2="44"/>
+    <line x1="50" y1="35" x2="50" y2="53"/>
+  </g>
+  <text x="50" y="49" font-family="Georgia, 'Times New Roman', serif" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.8">ISO</text>
+  <text x="50" y="62" font-family="Georgia, 'Times New Roman', serif" font-size="6.5" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.6">9001:2015</text>
+</svg>

@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אודות · ירון יוסף · Targo Solutions</title>
+<meta name="description" content="ירון יוסף, מייסד Targo Solutions. 25 שנות ניסיון בתפעול, רכש ושרשרת אספקה ברפא״ל, גליל מדיקל, נובולוג וארינטה.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:           #FBF7EE;
+  --paper:        #FFFFFF;
+  --celeste:      #F2EBD8;
+  --celeste-deep: #E5DAB9;
+  --lavender:     #F0E8D2;
+  --ink:          #0A0A0A;
+  --ink-soft:     #1F1B17;
+  --body:         #4A4540;
+  --body-light:   #8B8275;
+  --blue:         #B8843A;     /* primary accent (bronze) */
+  --blue-hover:   #976A29;
+  --blue-soft:    #E5C780;
+  --orange:       #B8843A;
+  --green:        #8A7A4A;
+  --line:         #D8CCB0;
+  --line-soft:    #ECE3CD;
+  --gold:         #C9A158;
+  --gold-light:   #E5C780;
+  --bronze:       #8B6B3D;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background-color:#FBF7EE;
+  background-image:
+    radial-gradient(circle 800px at 100% 200px, rgba(201,161,88,0.10), transparent),
+    radial-gradient(circle 600px at 0% 90%, rgba(201,161,88,0.10), transparent);
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
+  color:var(--ink);
+  font-family:'Noto Sans Hebrew',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-weight:400; font-size:17px; line-height:1.55;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+img { max-width:100%; display:block; }
+a { color:inherit; text-decoration:none; }
+
+/* ── PRIMITIVES ── */
+.container { max-width:1240px; margin:0 auto; padding:0 1.5rem; }
+@media (min-width:768px) { .container { padding:0 2.5rem; } }
+
+.eyebrow {
+  display:inline-flex; align-items:center; gap:0.7rem;
+  font-size:0.78rem; font-weight:600; letter-spacing:0.16em;
+  text-transform:uppercase; color:var(--blue);
+  margin-bottom:1.25rem;
+}
+.eyebrow::before {
+  content:''; width:1.6rem; height:2px; background:var(--blue);
+  border-radius:2px;
+}
+
+h1, h2, h3, h4 { color:var(--ink); letter-spacing:-0.015em; }
+
+.display {
+  font-size:clamp(2.5rem, 4.5vw + 1rem, 5.25rem);
+  font-weight:300; line-height:1.05; letter-spacing:-0.025em;
+}
+.display .hl { color:var(--blue); font-weight:300; }
+
+.h2 {
+  font-size:clamp(2rem, 2.5vw + 1rem, 3.5rem);
+  font-weight:300; line-height:1.1; letter-spacing:-0.02em;
+}
+.h2 .hl { color:var(--blue); font-weight:300; }
+
+.h3 {
+  font-size:1.4rem; font-weight:600; line-height:1.25;
+}
+
+.lead {
+  font-size:1.18rem; line-height:1.6; color:var(--body);
+  font-weight:400; max-width:54ch;
+}
+.lead strong { color:var(--ink); font-weight:600; }
+
+p { color:var(--body); }
+
+/* ── BUTTONS ── */
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:0.55rem;
+  padding:0.95rem 2rem; min-width:170px;
+  font-family:inherit; font-size:1rem; font-weight:600;
+  border-radius:9999px; border:1px solid transparent;
+  cursor:pointer; transition:all 0.25s cubic-bezier(0.22,1,0.36,1);
+  white-space:nowrap;
+}
+.btn-primary { background:var(--blue); color:#fff; }
+.btn-primary:hover { background:var(--blue-hover); transform:translateY(-1px); box-shadow:0 8px 24px -8px rgba(184,132,58,0.45); }
+.btn-secondary { background:var(--ink); color:#fff; }
+.btn-secondary:hover { background:var(--ink-soft); }
+.btn-ghost { background:transparent; color:var(--ink); border-color:var(--line); }
+.btn-ghost:hover { border-color:var(--ink); }
+.btn .arrow { font-weight:300; }
+
+/* ── SKIP LINK ── */
+.skip-link {
+  position:fixed; right:1rem; top:-3rem; z-index:1000;
+  background:var(--blue); color:#fff;
+  padding:0.7rem 1.2rem; font-size:0.9rem; font-weight:600;
+  border-radius:9999px; transition:top 0.2s;
+}
+.skip-link:focus { top:1rem; outline:3px solid #fff; outline-offset:2px; }
+
+/* ── NAV ── */
+nav {
+  position:sticky; top:0; z-index:99; background:rgba(255,255,255,0.85);
+  border-bottom:1px solid var(--line-soft);
+  backdrop-filter:saturate(180%) blur(10px);
+  -webkit-backdrop-filter:saturate(180%) blur(10px);
+}
+.nav-inner {
+  max-width:1240px; margin:0 auto; padding:1rem 1.5rem;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+}
+@media (min-width:768px) { .nav-inner { padding:1.1rem 2.5rem; } }
+.nav-logo {
+  font-weight:700; font-size:1.1rem; color:var(--ink);
+  display:flex; align-items:baseline; gap:0.4rem;
+}
+.nav-logo span { color:var(--blue); font-weight:500; }
+.nav-links { display:flex; align-items:center; gap:2rem; }
+.nav-links a { font-size:1rem; color:var(--body); font-weight:500; transition:color 0.2s; }
+.nav-links a:hover { color:var(--ink); }
+.nav-links a[aria-current="page"] { color:var(--ink); font-weight:600; }
+.nav-cta {
+  background:var(--blue); color:#fff !important; padding:0.55rem 1.4rem;
+  border-radius:9999px; font-weight:600;
+  transition:background 0.2s;
+}
+.nav-cta:hover { background:var(--blue-hover); }
+@media (max-width:640px) {
+  .nav-links a:not(.nav-cta) { display:none; }
+}
+
+/* ── HERO ── */
+.hero {
+  background:transparent;
+  padding:5rem 0 6rem;
+  position:relative; overflow:hidden;
+}
+.hero-grid {
+  position:relative; z-index:1;
+  display:grid; grid-template-columns:1.15fr 1fr; gap:4rem;
+  align-items:center;
+}
+.hero-content { max-width:640px; }
+.hero h1 { margin-bottom:1.6rem; }
+.hero-lead { margin-bottom:2.4rem; }
+.hero-cta { display:flex; gap:0.8rem; flex-wrap:wrap; margin-bottom:0; }
+
+.hero-photo {
+  position:relative;
+  display:flex; justify-content:center;
+}
+.photo-frame {
+  position:relative; width:100%; max-width:420px;
+}
+.photo-frame img {
+  position:relative; z-index:1;
+  width:100%; aspect-ratio:4/5; max-height:60vh;
+  object-fit:cover; object-position:top center;
+  border-radius:24px;
+}
+.photo-tag {
+  position:absolute; bottom:1.6rem; left:1.6rem; z-index:2;
+  background:#fff;
+  border-radius:14px;
+  padding:0.85rem 1.1rem;
+  box-shadow:0 8px 24px -10px rgba(10,10,10,0.18);
+  display:flex; flex-direction:column; gap:0.15rem;
+}
+.photo-tag-name { font-size:1rem; font-weight:700; color:var(--ink); }
+.photo-tag-role { font-size:0.82rem; color:var(--body); font-weight:500; }
+
+/* Hero stats */
+.hero-stats {
+  margin-top:5rem;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem;
+}
+.stat {
+  background:var(--celeste);
+  padding:2.4rem 2rem 2rem;
+  border-radius:18px;
+  position:relative; overflow:hidden;
+  transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+.stat:hover { transform:translateY(-4px); }
+.stat:nth-child(2) { background:var(--lavender); }
+.stat:nth-child(3) { background:#FFF4EC; }
+.stat:nth-child(3) .stat-num { color:var(--orange); }
+.stat-num {
+  font-size:clamp(3rem, 4vw + 1rem, 4.5rem);
+  font-weight:300; line-height:1; color:var(--blue);
+  letter-spacing:-0.03em; margin-bottom:0.6rem;
+  font-feature-settings:'lnum' 1;
+}
+.stat-label {
+  font-size:0.95rem; line-height:1.4; color:var(--ink);
+  font-weight:500; max-width:14ch;
+}
+
+/* ── STORY ── */
+.story-sec {
+  background:var(--paper);
+  padding:6rem 0;
+}
+.story-intro {
+  max-width:720px; margin-bottom:3.5rem;
+}
+.story-intro h2 { margin-bottom:1.6rem; }
+.story-intro p { font-size:1.18rem; line-height:1.65; max-width:60ch; color:var(--body); }
+.story-intro p strong { color:var(--ink); font-weight:600; }
+
+.tracks {
+  display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;
+  margin-bottom:4rem;
+}
+.track {
+  background:#fff;
+  border:1px solid var(--line-soft);
+  border-radius:20px;
+  padding:2.4rem;
+  transition:transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s;
+  position:relative;
+}
+.track:hover { transform:translateY(-3px); box-shadow:0 16px 40px -20px rgba(10,10,10,0.15); border-color:var(--blue-soft); }
+.track-mark {
+  width:48px; height:48px;
+  background:var(--celeste); color:var(--blue);
+  border-radius:14px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.5rem; font-weight:700;
+  margin-bottom:1.4rem;
+}
+.track:nth-child(2) .track-mark { background:#FFF4EC; color:var(--orange); }
+.track-label {
+  font-size:0.78rem; font-weight:600; letter-spacing:0.14em;
+  text-transform:uppercase; color:var(--body-light);
+  margin-bottom:0.6rem;
+}
+.track h3 { font-size:1.3rem; font-weight:700; line-height:1.3; margin-bottom:0.9rem; color:var(--ink); }
+.track p { font-size:1.04rem; line-height:1.65; color:var(--body); }
+.track p strong { color:var(--ink); font-weight:600; }
+
+/* Pull quote */
+.pull {
+  background:linear-gradient(135deg, var(--celeste) 0%, var(--lavender) 100%);
+  border-radius:24px;
+  padding:3.5rem 3rem;
+  margin:0;
+  position:relative;
+}
+.pull::before {
+  content:'״'; position:absolute;
+  top:1.2rem; right:2.4rem;
+  font-size:5rem; line-height:1;
+  color:var(--blue); opacity:0.3;
+  font-family:Georgia, serif;
+}
+.pull p {
+  font-size:clamp(1.4rem, 1.5vw + 1rem, 2rem);
+  line-height:1.45; font-weight:300; letter-spacing:-0.015em;
+  color:var(--ink); margin-bottom:1.6rem;
+  max-width:62ch;
+}
+.pull cite {
+  font-style:normal; font-size:0.95rem; font-weight:600;
+  color:var(--blue); letter-spacing:0.04em;
+}
+
+/* ── APPROACH ── */
+.approach-sec { background:transparent; padding:6rem 0; }
+.approach-grid {
+  display:grid; grid-template-columns:1.2fr 1fr; gap:4rem;
+  align-items:start;
+}
+.approach-text h2 { margin-bottom:2rem; }
+.approach-text p { font-size:1.1rem; line-height:1.7; color:var(--body); margin-bottom:1.4rem; max-width:58ch; }
+.approach-text p strong { color:var(--ink); font-weight:600; }
+
+.iso-card {
+  background:var(--celeste);
+  border-radius:20px;
+  padding:2.4rem;
+  display:flex; gap:1.6rem; align-items:flex-start;
+  position:sticky; top:6rem;
+}
+.iso-card img { width:88px; height:88px; flex-shrink:0; }
+.iso-card-text { flex:1; }
+.iso-card-label {
+  font-size:0.75rem; font-weight:600; letter-spacing:0.14em;
+  text-transform:uppercase; color:var(--blue);
+  margin-bottom:0.4rem;
+}
+.iso-card-main {
+  font-size:1.35rem; font-weight:700; color:var(--ink);
+  margin-bottom:0.7rem; line-height:1.25;
+}
+.iso-card-desc { font-size:1rem; line-height:1.55; color:var(--body); }
+
+/* ── PRINCIPLES ── */
+.principles-sec {
+  background:var(--celeste);
+  padding:6rem 0;
+}
+.principles-head { max-width:680px; margin-bottom:3.5rem; }
+.principles-head h2 { margin-top:0.4rem; }
+
+.principles-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+.principle {
+  background:#fff; border-radius:20px;
+  padding:2.4rem;
+  transition:transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s;
+}
+.principle:hover { transform:translateY(-4px); box-shadow:0 20px 40px -20px rgba(10,10,10,0.15); }
+.principle .num {
+  font-size:0.9rem; font-weight:700; color:var(--blue);
+  letter-spacing:0.1em; margin-bottom:1.6rem;
+  font-feature-settings:'lnum' 1;
+}
+.principle h3 { font-size:1.5rem; font-weight:700; line-height:1.2; margin-bottom:1rem; color:var(--ink); }
+.principle p { font-size:1.04rem; line-height:1.65; color:var(--body); }
+
+/* ── TIMELINE ── */
+.timeline-sec { background:transparent; padding:6rem 0; }
+.timeline-head { max-width:760px; margin-bottom:4rem; }
+.timeline-head h2 { margin-top:0.4rem; margin-bottom:1.4rem; }
+.timeline-head p {
+  font-size:1.15rem; line-height:1.65; color:var(--body); max-width:58ch;
+}
+
+.timeline {
+  list-style:none; position:relative; padding:0;
+  max-width:920px;
+}
+.timeline::before {
+  content:''; position:absolute;
+  top:1rem; bottom:1rem; right:9px;
+  width:2px; background:linear-gradient(to bottom, var(--celeste-deep) 0%, var(--celeste-deep) 100%);
+  border-radius:2px;
+}
+.tl-item {
+  position:relative; padding:0 3rem 2.4rem 0;
+  display:grid; grid-template-columns:1fr; gap:0.6rem;
+}
+.tl-item:last-child { padding-bottom:0; }
+.tl-item::before {
+  content:''; position:absolute;
+  top:1.5rem; right:0;
+  width:20px; height:20px; border-radius:50%;
+  background:#fff; border:3px solid var(--celeste-deep);
+  z-index:1; transition:all 0.25s;
+}
+.tl-item:hover::before { border-color:var(--blue); }
+.tl-item.now::before {
+  background:var(--blue); border-color:var(--blue);
+  box-shadow:0 0 0 6px rgba(184,132,58,0.18);
+}
+.tl-year {
+  font-size:0.92rem; font-weight:700; color:var(--blue);
+  direction:ltr; text-align:right;
+  font-feature-settings:'tnum' 1, 'lnum' 1;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:0.04em; margin-bottom:0.2rem;
+}
+.tl-card {
+  background:var(--paper); border-radius:18px;
+  border:1px solid var(--line-soft);
+  padding:1.8rem 2rem;
+  transition:all 0.25s;
+}
+.tl-item.now .tl-card {
+  background:linear-gradient(135deg, var(--celeste) 0%, var(--lavender) 100%);
+  border-color:var(--blue-soft);
+}
+.tl-item:hover .tl-card { border-color:var(--blue-soft); transform:translateX(-4px); }
+.tl-role { font-size:1.25rem; font-weight:700; color:var(--ink); line-height:1.3; margin-bottom:0.5rem; }
+.tl-item.now .tl-role { font-size:1.45rem; color:var(--blue); }
+.tl-meta {
+  font-size:0.95rem; color:var(--body); margin-bottom:0.9rem;
+  display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;
+}
+.tl-badge {
+  background:#fff; color:var(--blue);
+  border:1px solid var(--blue-soft);
+  padding:0.2rem 0.7rem; border-radius:9999px;
+  font-size:0.78rem; font-weight:600; letter-spacing:0.02em;
+  text-transform:uppercase;
+}
+.tl-desc { font-size:1.02rem; line-height:1.6; color:var(--body); }
+.tl-highlight {
+  margin-top:0.9rem; display:flex; align-items:center; gap:0.7rem;
+  font-size:0.98rem; font-weight:600; color:var(--blue);
+}
+.tl-highlight::before {
+  content:''; flex-shrink:0;
+  width:1.4rem; height:2px; background:currentColor;
+  border-radius:2px;
+}
+
+/* ── CTA ── */
+.cta-sec {
+  background:linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 100%);
+  color:#fff;
+  padding:6rem 0;
+  position:relative; overflow:hidden;
+}
+.cta-sec::before {
+  content:''; position:absolute;
+  top:-30%; right:-10%;
+  width:60vw; height:60vw; max-width:700px; max-height:700px;
+  background:radial-gradient(circle, rgba(184,132,58,0.35) 0%, transparent 70%);
+  pointer-events:none;
+}
+.cta-grid {
+  position:relative;
+  display:grid; grid-template-columns:1.1fr 1fr; gap:4rem; align-items:center;
+}
+.cta-grid h2 {
+  color:#fff;
+  font-size:clamp(2.2rem, 3vw + 1rem, 4rem);
+  font-weight:300; line-height:1.05; letter-spacing:-0.025em;
+}
+.cta-grid h2 .hl { color:var(--blue-soft); font-weight:300; }
+.cta-right p { font-size:1.1rem; color:rgba(255,255,255,0.8); margin-bottom:1.6rem; line-height:1.6; }
+.cta-btns { display:flex; flex-wrap:wrap; gap:0.8rem; margin-bottom:1.4rem; }
+.cta-btns .btn-primary { background:#fff; color:var(--ink); }
+.cta-btns .btn-primary:hover { background:var(--celeste); color:var(--ink); }
+.cta-btns .btn-ghost { color:#fff; border-color:rgba(255,255,255,0.3); }
+.cta-btns .btn-ghost:hover { border-color:#fff; }
+.cta-note { font-size:0.9rem; color:rgba(255,255,255,0.65); }
+.cta-note .check { color:var(--blue-soft); font-weight:700; margin-left:0.3rem; }
+
+/* ── FOOTER ── */
+footer {
+  background:#fff; border-top:1px solid var(--line-soft);
+  padding:2.4rem 0;
+}
+.footer-inner {
+  max-width:1240px; margin:0 auto; padding:0 1.5rem;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:1.4rem;
+}
+@media (min-width:768px) { .footer-inner { padding:0 2.5rem; } }
+.footer-logo { font-size:1.05rem; font-weight:700; color:var(--ink); }
+.footer-logo span { color:var(--blue); font-weight:500; }
+.footer-links { display:flex; gap:1.4rem; }
+.footer-links a { font-size:0.9rem; color:var(--body); transition:color 0.2s; }
+.footer-links a:hover { color:var(--blue); }
+.footer-meta { font-size:0.85rem; color:var(--body-light); }
+
+/* ── RESPONSIVE ── */
+@media (max-width:960px) {
+  .hero-grid { grid-template-columns:1fr; gap:3rem; }
+  .hero-photo { order:-1; max-width:340px; margin:0 auto; }
+  .hero-stats { grid-template-columns:1fr; gap:0.8rem; }
+  .stat { padding:1.8rem; }
+  .tracks { grid-template-columns:1fr; }
+  .approach-grid { grid-template-columns:1fr; gap:2.4rem; }
+  .iso-card { position:static; }
+  .principles-grid { grid-template-columns:1fr; }
+  .cta-grid { grid-template-columns:1fr; gap:2rem; }
+  .pull { padding:2.4rem 1.6rem; }
+  .pull::before { right:1.4rem; top:0.6rem; font-size:3.5rem; }
+}
+@media (max-width:640px) {
+  .hero { padding:3rem 0 4rem; }
+  .story-sec, .approach-sec, .principles-sec, .timeline-sec, .cta-sec { padding:4rem 0; }
+  .tl-item { padding-right:2.5rem; }
+  .tl-card { padding:1.4rem 1.4rem; }
+  .timeline::before { right:7px; }
+  .tl-item::before { width:16px; height:16px; }
+}
+
+/* ───── BRAND LOGO IN NAV ───── */
+.nav-logo { display:flex !important; align-items:center !important; }
+.nav-logo-img {
+  height:46px; width:auto; display:block;
+  mix-blend-mode:multiply;
+  transition:height 0.55s ease;
+}
+
+/* ───── HEADER SHRINK ON SCROLL ───── */
+nav { transition:padding 0.55s ease, background 0.4s ease, box-shadow 0.4s ease; }
+.nav-inner { transition:padding 0.55s ease; }
+nav:not(.is-scrolled) .nav-inner { padding:1.8rem 2.5rem; }
+nav:not(.is-scrolled) .nav-logo-img { height:72px; }
+nav.is-scrolled { box-shadow:0 4px 18px -12px rgba(10,10,10,0.18); }
+nav.is-scrolled .nav-inner { padding:0.85rem 2.5rem; }
+nav.is-scrolled .nav-logo-img { height:42px; }
+
+/* ───── MOBILE HAMBURGER ───── */
+.nav-burger {
+  display:none;
+  width:44px; height:44px;
+  align-items:center; justify-content:center;
+  background:transparent; border:1px solid var(--line);
+  border-radius:9999px; cursor:pointer;
+  flex-direction:column; gap:5px;
+  transition:border-color 0.2s, background 0.2s;
+}
+.nav-burger span {
+  display:block; width:18px; height:2px; background:var(--ink);
+  transition:transform 0.35s ease, opacity 0.25s ease;
+  transform-origin:center;
+}
+.nav-burger:hover { border-color:var(--gold); }
+nav.menu-open .nav-burger span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+nav.menu-open .nav-burger span:nth-child(2) { opacity:0; }
+nav.menu-open .nav-burger span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+@media (max-width:900px) {
+  .nav-burger { display:flex; }
+  .nav-inner { position:relative; }
+  .nav-links {
+    position:absolute;
+    top:100%; right:0; left:0;
+    flex-direction:column; gap:0;
+    background:rgba(255,255,255,0.98);
+    backdrop-filter:saturate(180%) blur(12px);
+    -webkit-backdrop-filter:saturate(180%) blur(12px);
+    border-top:1px solid var(--line-soft);
+    padding:1rem 1.5rem;
+    transform:translateY(-12px);
+    opacity:0; visibility:hidden;
+    transition:opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  }
+  nav.menu-open .nav-links {
+    opacity:1; visibility:visible; transform:translateY(0);
+  }
+  .nav-links a {
+    padding:0.95rem 0.5rem;
+    border-bottom:1px solid var(--line-soft);
+    width:100%; font-size:1.05rem;
+  }
+  .nav-links a:last-child { border-bottom:none; }
+  .nav-links .nav-cta {
+    margin-top:0.6rem; align-self:flex-start;
+  }
+  nav:not(.is-scrolled) .nav-inner { padding:1.2rem 1.5rem; }
+  nav.is-scrolled .nav-inner { padding:0.7rem 1.5rem; }
+  nav:not(.is-scrolled) .nav-logo-img { height:56px; }
+}
+
+/* ───── DARK HERO (warm, slightly lighter than CTA) ───── */
+.hero {
+  background:linear-gradient(135deg, #14110E 0%, #1F1A15 60%, #28211B 100%) !important;
+  color:#fff;
+  padding:6rem 0 6rem !important;
+  position:relative; overflow:hidden;
+}
+.hero::before {
+  content:''; position:absolute;
+  top:-30%; right:-10%;
+  width:60vw; height:60vw; max-width:700px; max-height:700px;
+  background:radial-gradient(circle, rgba(229,199,128,0.30) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero::after {
+  content:''; position:absolute;
+  bottom:-40%; left:-15%;
+  width:55vw; height:55vw; max-width:600px; max-height:600px;
+  background:radial-gradient(circle, rgba(201,161,88,0.18) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero .container { position:relative; z-index:1; }
+.hero h1, .hero h1 * { color:#fff !important; }
+.hero .eyebrow { color:var(--gold-light); }
+.hero .eyebrow::before { background:var(--gold-light); }
+.hero-tagline { color:rgba(255,255,255,0.78) !important; }
+.hero-tagline strong { color:#fff !important; font-weight:600; }
+.industry-chip {
+  background:rgba(255,255,255,0.06) !important;
+  color:#fff !important;
+  border:1px solid rgba(229,199,128,0.35) !important;
+}
+.industry-chip:hover {
+  border-color:var(--gold-light) !important;
+  color:var(--gold-light) !important;
+  background:rgba(229,199,128,0.08) !important;
+}
+.hero .btn-primary { background:#fff !important; color:var(--ink) !important; }
+.hero .btn-primary:hover { background:var(--gold-light) !important; color:var(--ink) !important; }
+.hero .btn-ghost { color:#fff !important; border-color:rgba(255,255,255,0.32) !important; }
+.hero .btn-ghost:hover { color:var(--gold-light) !important; border-color:var(--gold-light) !important; }
+.hero-image-wrap::before { display:none !important; }
+.photo-frame::before { display:none !important; }
+
+/* ───── HEADING TYPOGRAPHIC PLAY: bold ink + light gold accent word ───── */
+.display, .h2 { font-weight:800 !important; letter-spacing:-0.025em; }
+.display .hl, .h2 .hl {
+  font-weight:300 !important;
+  color:var(--gold) !important;
+}
+.hero .display .hl { color:var(--gold-light) !important; }
+.cta-grid h2 { font-weight:800 !important; }
+.cta-grid h2 .hl { font-weight:300 !important; color:var(--gold-light) !important; }
+.profile-title { font-weight:800; }
+
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">דלג לתוכן הראשי</a>
+
+<!-- NAV -->
+<nav aria-label="ניווט ראשי">
+  <div class="nav-inner">
+    <a href="index-v2.html" class="nav-logo" aria-label="Targo Solutions — דף הבית">
+      <img src="LOGO.png" alt="Targo · Targeted Solutions" class="nav-logo-img" onerror="this.style.display='none'" />
+    </a>
+    <div class="nav-links" id="navMenu">
+      <a href="index-v2.html">עמוד ראשי</a>
+      <a href="about-v2.html" aria-current="page">אודות</a>
+      <a href="https://wa.link/huf1g6" class="nav-cta">דברו איתנו</a>
+    </div>
+    <button class="nav-burger" aria-label="פתח תפריט" aria-expanded="false" aria-controls="navMenu" onclick="toggleMenu(this)">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="eyebrow">אודות</div>
+        <h1 class="display">25 שנה בתחום, <span class="hl">חי ונושם את השטח.</span></h1>
+        <p class="lead hero-lead">
+          רפא״ל, ארינטה, גליל מדיקל, נובולוג. <strong>כל תפקיד, בשטח.</strong>
+          בינואר 2024 פתחתי את Targo כדי לתת לחברות קטנות, בינוניות גישה לניסיון הזה,
+          בלי לשלם על משרה מלאה שהן לא צריכות.
+        </p>
+        <div class="hero-cta">
+          <a href="https://wa.link/huf1g6" class="btn btn-primary">בואו נדבר <span class="arrow">←</span></a>
+          <a href="#timeline" class="btn btn-ghost">קרא את הסיפור</a>
+        </div>
+      </div>
+
+      <div class="hero-photo">
+        <div class="photo-frame">
+          <img
+            src="founder.jpg"
+            sizes="(max-width:960px) 80vw, 420px"
+            width="538" height="720"
+            alt="ירון יוסף, מייסד Targo Solutions"
+            loading="eager" decoding="async"
+          />
+          <div class="photo-tag">
+            <span class="photo-tag-name">ירון יוסף</span>
+            <span class="photo-tag-role">מייסד ו-CEO · Targo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-stats" aria-label="סטטיסטיקות מפתח">
+      <div class="stat">
+        <div class="stat-num">25+</div>
+        <div class="stat-label">שנות ניסיון בתעשייה</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">22%</div>
+        <div class="stat-label">חיסכון ממוצע בעלויות רכש</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <div class="stat-label">תעשיות ליבה: ביטחוני, רפואי, HiTech, תעשייה</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-sec">
+  <div class="container">
+    <div class="story-intro">
+      <div class="eyebrow">הסיפור</div>
+      <h2 class="h2">למה פתחתי <span class="hl">את Targo?</span></h2>
+      <p>אחרי 25 שנה בתעשייה הבנתי שיש שני סוגי חברות שסובלות מאותה בעיה, בצורה שונה.</p>
+    </div>
+
+    <div class="tracks">
+      <article class="track">
+        <div class="track-label">חברות קטנות, בינוניות</div>
+        <h3>בונים שרשרת אספקה מאפס</h3>
+        <p>חברות מוצר שזקוקות לבנות שרשרת אספקה מאפס, ולגדול איתה. <strong>אני נכנס כ-Fractional COO</strong>, בונה את המנגנון, מנהל את הספקים, ונשאר לטווח ארוך כחלק מהצוות.</p>
+      </article>
+
+      <article class="track">
+        <div class="track-label">חברות יצרניות גדולות</div>
+        <h3>מייעלים מערכות קיימות</h3>
+        <p>חברות ייצור קיימות שמשלמות יותר מדי. אני מביא <strong>רשת יצרנים בינלאומית מוכחת</strong>. יודע בדיוק, לפי הדרישה הטכנית של כל מוצר, איפה בעולם לייצר אותו בצורה הטובה והזולה ביותר.</p>
+      </article>
+    </div>
+
+    <blockquote class="pull">
+      <p>הידע הזה, לדעת לא רק מה לקנות אלא איפה ולמה שם, זה מה שנבנה אחרי 25 שנה. אי אפשר לקנות אותו בגוגל.</p>
+      <cite>ירון יוסף · מייסד</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach-sec">
+  <div class="container">
+    <div class="approach-grid">
+      <div class="approach-text">
+        <div class="eyebrow">הגישה</div>
+        <h2 class="h2">איך זה <span class="hl">עובד?</span></h2>
+        <p>רוב הלקוחות <strong>מתחילים בפרויקט אחד:</strong> NPI, ספק בעייתי, לוגיסטיקה שלא עובדת, ייעול רכש. משהו ממוקד, עם תוצאה ברורה.</p>
+        <p>אחרי שרואים ערך, הם לא רוצים שאעזוב. עוברים לריטיינר חודשי, ואני נכנס כחלק מהצוות. לא ייעוץ. לא מצגת. <strong>ניהול בפועל</strong> של קטגוריות, ספקים ולוגיסטיקה, בדיוק כמו מנהל תפעול פנימי.</p>
+      </div>
+
+      <aside class="iso-card">
+        <img src="iso-9001.svg" alt="ISO 9001:2015 Certified Company" />
+        <div class="iso-card-text">
+          <div class="iso-card-label">אישור איכות בינלאומי</div>
+          <div class="iso-card-main">ISO 9001 מוסמך</div>
+          <p class="iso-card-desc">ניהול איכות לפי תקן בינלאומי. תהליכים מתועדים, שקיפות מלאה, ועבודה שנשארת גם אחרינו.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="principles-sec">
+  <div class="container">
+    <div class="principles-head">
+      <div class="eyebrow">עקרונות</div>
+      <h2 class="h2">3 דברים שלא <span class="hl">מתפשרים עליהם.</span></h2>
+    </div>
+
+    <div class="principles-grid">
+      <article class="principle">
+        <div class="num">01</div>
+        <h3>איכות</h3>
+        <p>לא מוסר פרויקט שאינו עומד בתקן. ISO 9001 הוא לא תג, הוא הדרך שבה אנחנו עובדים כל יום.</p>
+      </article>
+      <article class="principle">
+        <div class="num">02</div>
+        <h3>שקיפות</h3>
+        <p>הלקוח יודע הכל, תמיד. אין הפתעות, אין מידע שמוסתר. דוח שבועי, תמחור פתוח, תהליכים מתועדים.</p>
+      </article>
+      <article class="principle">
+        <div class="num">03</div>
+        <h3>מחויבות לתוצאה</h3>
+        <p>מנתחים אתגרים, פועלים להצלחה. לא מסכמים פגישה, מבצעים פרויקט.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-sec" id="timeline">
+  <div class="container">
+    <div class="timeline-head">
+      <div class="eyebrow">מסלול קריירה</div>
+      <h2 class="h2">2000 עד <span class="hl">היום</span></h2>
+      <p>25 שנה שנבנו בשטח: ברפא״ל, בחברות MedTech מובילות, ובסטארטאפים שצריכים לגדול. כל תפקיד הוסיף שכבה שקשה לקנות.</p>
+    </div>
+
+    <ol class="timeline">
+      <li class="tl-item now">
+        <div class="tl-year">2024 – היום</div>
+        <div class="tl-card">
+          <div class="tl-role">מייסד ו-CEO · Targo Solutions</div>
+          <div class="tl-meta">
+            ע.ש. טרגו פתרונות בע״מ
+            <span class="tl-badge">Fractional COO</span>
+            <span class="tl-badge">ISO 9001</span>
+          </div>
+          <p class="tl-desc">שירותי ניהול תפעול, רכש ולוגיסטיקה לחברות Series A/B. מודל: פרויקט ממוקד, ריטיינר חודשי.</p>
+        </div>
+      </li>
+
+      <li class="tl-item">
+        <div class="tl-year">2018 – 2024</div>
+        <div class="tl-card">
+          <div class="tl-role">דירקטור שרשרת אספקה</div>
+          <div class="tl-meta">
+            ארינטה, קיסריה · CARDIO CT המתקדם בעולם
+            <span class="tl-badge">MedTech</span>
+          </div>
+          <p class="tl-desc">הובלת שרשרת האספקה, רכש ולוגיסטיקה גלובלית. ניהול ספקים בינלאומיים, מדיניות מלאי, עבודה מול R&amp;D וייצור.</p>
+          <div class="tl-highlight">חיסכון של 22% בעלויות רכש ולוגיסטיקה גלובליות</div>
+        </div>
+      </li>
+
+      <li class="tl-item">
+        <div class="tl-year">2010 – 2018</div>
+        <div class="tl-card">
+          <div class="tl-role">סמנכ״ל תפעול ושירות</div>
+          <div class="tl-meta">
+            מדיקוויפ, קבוצת נובולוג, חיפה · ציוד רפואי
+            <span class="tl-badge">MedTech</span>
+          </div>
+          <p class="tl-desc">בניית מערך תפעול מאפס, הובלת רכש ואספקה, אחריות מול משרד הבריאות ומכון התקנים.</p>
+          <div class="tl-highlight">קבלת אישור FDA ו-CE, ניהול צוות של 6 עובדים</div>
+        </div>
+      </li>
+
+      <li class="tl-item">
+        <div class="tl-year">2008 – 2009</div>
+        <div class="tl-card">
+          <div class="tl-role">מנהל רכש גלובלי</div>
+          <div class="tl-meta">
+            גליל מדיקל, יקנעם · מכשור רפואי (NASDAQ)
+            <span class="tl-badge">MedTech</span>
+          </div>
+          <p class="tl-desc">הובלת מערך הרכש והאספקה, שותפות בקביעת אסטרטגיה עסקית. ניהול מלאים בארץ ובחו״ל.</p>
+        </div>
+      </li>
+
+      <li class="tl-item">
+        <div class="tl-year">2003 – 2007</div>
+        <div class="tl-card">
+          <div class="tl-role">מנהל פרויקטים ותפ״י</div>
+          <div class="tl-meta">
+            רפא״ל ודיגיטרון, חיפה
+            <span class="tl-badge">ביטחוני</span>
+            <span class="tl-badge">אלקטרוניקה</span>
+          </div>
+          <p class="tl-desc">הקמת מחסן מרכזי בחטיבה, אפיון מודלי מלאי, הקמת מערך רכש Full Turn Key. עבודה מול ERP-ORACLE.</p>
+          <div class="tl-highlight">בניית מערך רכש ולוגיסטיקה מאפס בפרויקט ביטחוני רב-שנתי</div>
+        </div>
+      </li>
+
+      <li class="tl-item">
+        <div class="tl-year">2000 – 2003</div>
+        <div class="tl-card">
+          <div class="tl-role">לימודי הנדסה, סטא׳ז ברפא״ל</div>
+          <div class="tl-meta">תפקידים שונים בתעשיית האלקטרוניקה</div>
+          <p class="tl-desc">למידה מעשית של תהליכי ייצור, רכש ושרשרת אספקה.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="container">
+    <div class="cta-grid">
+      <h2>שיחת היכרות. <span class="hl">30 דקות, ללא עלות.</span></h2>
+      <div class="cta-right">
+        <p>ספרו לי על האתגר שלכם. אגיד לכם בגלוי אם ואיך אני יכול לעזור, ללא התחייבות.</p>
+        <div class="cta-btns">
+          <a href="https://wa.link/huf1g6" class="btn btn-primary">וואטסאפ <span class="arrow">←</span></a>
+          <a href="https://wa.link/cnhyo7" class="btn btn-ghost">הצעת ריטיינר במייל</a>
+        </div>
+        <p class="cta-note"><span class="check">✓</span>מענה תוך יום עסקים אחד &nbsp;<span class="check">✓</span>ללא התחייבות</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">ע.ש. טרגו פתרונות בע״מ <span>· Targo</span></div>
+    <div class="footer-links">
+      <a href="https://targosolutions.com/tou/">תקנון</a>
+      <a href="https://targosolutions.com/privacy-policy/">פרטיות</a>
+      <a href="https://targosolutions.com/accessibility/">נגישות</a>
+    </div>
+    <div class="footer-meta">© 2026 · כל הזכויות שמורות</div>
+  </div>
+</footer>
+
+<script>
+/* Header shrink on scroll */
+(function () {
+  var nav = document.querySelector('nav');
+  if (!nav) return;
+  var threshold = 24;
+  function update() {
+    if (window.scrollY > threshold) nav.classList.add('is-scrolled');
+    else nav.classList.remove('is-scrolled');
+  }
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+})();
+
+/* Mobile hamburger toggle */
+function toggleMenu(btn) {
+  var nav = document.querySelector('nav');
+  if (!nav) return;
+  var open = nav.classList.toggle('menu-open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  btn.setAttribute('aria-label', open ? 'סגור תפריט' : 'פתח תפריט');
+}
+</script>
+</body>
+</html>

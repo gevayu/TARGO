@@ -1,0 +1,23 @@
+# Local WordPress install (Local by Flywheel) — not portable
+.wp/
+
+# Local WP-CLI scripts with machine-specific paths
+.wpcli/
+
+# Claude Code project metadata
+.claude/
+
+# Temp / scratch files
+.tmp-*
+*.tmp
+
+# OS artifacts
+Thumbs.db
+.DS_Store
+ehthumbs.db
+Desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
